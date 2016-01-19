@@ -1,2 +1,5 @@
 # Affirmpy
-A Python library for the Affirm API.
+
+A Python lib for the Affirm API. Inspired by the project [affirm-ruby](https://github.com/reverbdotcom/affirm-ruby). 
+
+
