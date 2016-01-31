@@ -15,7 +15,7 @@ class Charge(object):
             raise ChargeError.from_response(response)
 
 
-    def api_request(self, url, method, params={}):
+    def _api_request(self, url, method, params={}):
         response = self.client.make_request(url, method, params)
         if response.is_success():
             event = ChargeEvent(response.body)
@@ -26,16 +26,16 @@ class Charge(object):
 
 
     def void(self):
-        return self.api_request("/charges/{0}/void".format(self.id), "post")
+        return self._api_request("/charges/{0}/void".format(self.id), "post")
 
 
     def refund(self, amount=None):
-        return self.api_request("/charges/{0}/refund".format(self.id), "post", {
+        return self._api_request("/charges/{0}/refund".format(self.id), "post", {
             amount:amount
         })
 
     def capture(self, order_id=None, shipping_carrier=None, shipping_confirmation=None):
-        return self.api_request("/charges/{0}/capture".format(self.id), "post", {
+        return self._api_request("/charges/{0}/capture".format(self.id), "post", {
             order_id:order_id,
             shipping_carrier:shipping_carrier,
             shipping_confirmation:shipping_confirmation
@@ -44,16 +44,16 @@ class Charge(object):
 
     def __init__(self, attrs={}, client=API.client()):
         self.client = client
-        self.do_attributes(attrs)
+        self._do_attributes(attrs)
 
-    def do_attributes(self, attrs):
+    def _do_attributes(self, attrs):
         for k,v in attrs:
             if k is "events":
-                self.events = self.parse_events(v)
+                self.events = self._parse_events(v)
             else:
                 setattr(self, k, v)
 
-    def parse_events(self, events_attributes):
+    def _parse_events(self, events_attributes):
         if events_attributes:
             return map(ChargeEvent, events_attributes)
         else:
@@ -64,7 +64,7 @@ class Charge(object):
 
     def refresh(self):
         response = self.client.make_request("/charges/{0}".format(self.id), "get")
-        self.do_attributes(response.body())
+        self._do_attributes(response.body())
 
         return self
 
