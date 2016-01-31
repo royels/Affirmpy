@@ -26,7 +26,7 @@ class Client(object):
             auth=(self.public_key, self.secret_key)
         )
         affirmed_response = self._affirmify(response)
-        self._handle_error(affirmed_response)
+        return self._handle_error(affirmed_response)
 
     def _affirmify(self, response):
         return Response(
