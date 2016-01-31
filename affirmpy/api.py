@@ -1,11 +1,11 @@
 from affirmpy.client import Client
-from affirmpy.static import Static
+from affirmpy.static import AffirmStatic
 
 
 class API(object):
-    public_key = Static.public_key
-    secret_key = Static.secret_key
-    api_url = Static.api_url
+    public_key = AffirmStatic.public_key
+    secret_key = AffirmStatic.secret_key
+    api_url = AffirmStatic.api_url
 
     @classmethod
     def client(cls):
