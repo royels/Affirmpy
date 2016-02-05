@@ -1,5 +1,8 @@
 from affirmpy.api import API
 from affirmpy.charge_event import ChargeEvent
+from affirmpy.errors.charge_error import ChargeError
+
+
 class Charge(object):
 
     @classmethod
@@ -11,16 +14,6 @@ class Charge(object):
         response = client.make_request("/charges", "post", checkout_token=checkout_token)
         if response.is_success():
             return cls(attrs=response.body(), client=client)
-        else:
-            raise ChargeError.from_response(response)
-
-
-    def _api_request(self, url, method, params={}):
-        response = self.client.make_request(url, method, params)
-        if response.is_success():
-            event = ChargeEvent(response.body)
-            self.events.append(event)
-            return event
         else:
             raise ChargeError.from_response(response)
 
@@ -42,9 +35,28 @@ class Charge(object):
         })
 
 
+    def is_void(self):
+        return self.void
+
+    def refresh(self):
+        response = self.client.make_request("/charges/{0}".format(self.id), "get")
+        self._do_attributes(response.body())
+        return self
+
+
     def __init__(self, attrs={}, client=API.client()):
         self.client = client
         self._do_attributes(attrs)
+
+
+    def _api_request(self, url, method, params={}):
+        response = self.client.make_request(url, method, params)
+        if response.is_success():
+            event = ChargeEvent(response.body)
+            self.events.append(event)
+            return event
+        else:
+            raise ChargeError.from_response(response)
 
     def _do_attributes(self, attrs):
         for k,v in attrs:
@@ -58,14 +70,3 @@ class Charge(object):
             return map(ChargeEvent, events_attributes)
         else:
             return []
-
-    def is_void(self):
-        return self.void
-
-    def refresh(self):
-        response = self.client.make_request("/charges/{0}".format(self.id), "get")
-        self._do_attributes(response.body())
-
-        return self
-
-
