@@ -22,11 +22,11 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='0.1.0',
+    version='0.1.1',
 
     description='A Python API wrapper for Affirm',
     long_description='A Python API wrapper for Affirm financial payments API, built off the reverbdotcom implementation'
-                     'in Ruby on GitHub at https://github.com/reverbdotcom/affirm-ruby',
+                     ' on GitHub at https://github.com/reverbdotcom/affirm-ruby',
 
     # The project's main homepage.
     url='https://github.com/royels/Affirmpy',
@@ -55,14 +55,7 @@ setup(
 
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate whether you support Python 2, Python 3 or both.
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.2',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
     ],
 
     # What does your project relate to?
@@ -70,7 +63,7 @@ setup(
 
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().
-    packages=find_packages(exclude=['contrib', 'docs', 'tests']),
+    packages=find_packages(exclude=['tests'])    ,
 
     # Alternatively, if you want to distribute just a my_module.py, uncomment
     # this:
@@ -86,9 +79,6 @@ setup(
     # dependencies). You can install these using the following syntax,
     # for example:
     # $ pip install -e .[dev,test]
-    extras_require={
-        'dev': ['check-manifest'],
-        'test': ['coverage'],
-    },
+
 
 )

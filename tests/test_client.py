@@ -2,33 +2,26 @@ from unittest import TestCase
 
 
 class TestClient(TestCase):
-    def test_retrieve(self):
+    def test_post(self):
         self.fail()
 
-    def test_create(self):
+    def test_get(self):
         self.fail()
 
-    def test__api_request(self):
+    def test_make_request(self):
         self.fail()
 
-    def test_void(self):
+    def test__affirmify(self):
         self.fail()
 
-    def test_refund(self):
+    def test__handle_error(self):
         self.fail()
 
-    def test_capture(self):
+    def test__raise_error(self):
         self.fail()
 
-    def test__do_attributes(self):
+    def test__url(self):
         self.fail()
 
-    def test__parse_events(self):
+    def test__affirm_headers(self):
         self.fail()
-
-    def test_is_void(self):
-        self.fail()
-
-    def test_refresh(self):
-        self.fail()
-
