@@ -24,7 +24,7 @@ pip install Affirmpy
 Set an initial client with credentials:
 
 ```python
-from affirmpy import API
+from affirmpy.api import API
 
 API.public_key = "WHEE"
 API.secret_key = "WOOO"
@@ -38,7 +38,7 @@ Error``` or subtype on failure.
 
 Start with:
 ```python
-from affirmpy import Charge
+from affirmpy.charge import Charge
 ```
 
 ### Creating Charges
@@ -55,4 +55,4 @@ charge = Charge.retrieve('macklemore')
 
 Raises `ResourceNotFoundError` if nonexistent charge.
 
-### 
+### Capturing charges
